@@ -1,0 +1,46 @@
+.my-main {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.top-wrapper {
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+#searchForm {
+    width: 50%;
+}
+
+.for-search {
+    width: 83%;
+    display: inline;
+}
+
+#btn-search {
+    width: 15%;
+}
+
+#result {
+    width: 100%
+}
+
+.my-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}

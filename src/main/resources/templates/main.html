@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Voca</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+</head>
+<body>
+<div class="col-md-12 my-main">
+    <div class="top-wrapper">
+        <h1 style="display:inline;">사전 검색</h1>
+        <a href="/myVoca" role="button" class="btn btn-primary">단어장</a>
+    </div>
+    <form id="searchForm">
+        <div class="form-group my-form">
+            <input id="en" name="en" class="for-search form-control" placeholder="찾으시려는 단어를 입력해주세요" th:value="${en}"/>
+            <button type="button" class="btn btn-success" id="btn-search">검색</button>
+        </div>
+        <p class="form-control" id="result" th:text="${ko}" th:value="${ko}">결과</p>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js" ></script>
+</body>
+</html>

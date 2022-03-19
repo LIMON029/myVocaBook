@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>내 단어장</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/voca.css" />
+</head>
+<body>
+<div class="col-md-12">
+    <div class="my-top">
+        <h1 style="display:inline;">내가 등록한 단어 목록</h1>
+        <a href="/main" class="btn btn-success my-btn" role="button">메인으로</a>
+        <a href="/vocaQuiz" class="btn btn-warning my-btn" role="button">단어 퀴즈</a>
+        <button class="btn btn-primary my-btn" data-toggle="modal" data-target="#modifyModal">단어 저장하기</button>
+    </div>
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th style="width: 8%; text-align: center;">단어 번호</th>
+            <th>영어</th>
+            <th>한글</th>
+            <th>품사</th>
+            <th>틀린 횟수</th>
+            <th style="width: 5%; text-align: center;">삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="voca:${vocaList}">
+                <td class="my-td" th:value="${voca.id}" th:text="${voca.id}" style="text-align: center;"></td>
+                <td class="my-td" th:value="${voca.en}" th:text="${voca.en}"></td>
+                <td class="my-td" th:value="${voca.ko}" th:text="${voca.ko}"></td>
+                <td class="my-td" th:value="${voca.part}" th:text="${voca.part}"></td>
+                <td class="my-td" th:value="${voca.wrong}" th:text="${voca.wrong}"></td>
+                <td class="my-td" style="padding: 0px;"><a class="btn btn-danger deleteBtn" th:onclick="|javascript:deleteVoca('${voca.id}')|" style="color: white;">X</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">단어 저장</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="en-content">영어</label>
+                    <input class="form-control" id="en-content" name="en-content" placeholder="영어를 입력해주세요">
+                </div>
+                <div class="form-group">
+                    <label for="ko-content">뜻</label>
+                    <input class="form-control" id="ko-content" name="ko-content" placeholder="뜻을 입력해주세요">
+                </div>
+                <div class="form-group">
+                    <select id="part-content" name="part-content" class="form-control">
+                        <option value="">품사</option>
+                        <option value="NOUN">명사</option>
+                        <option value="VERB">동사</option>
+                        <option value="ADVERB">부사</option>
+                        <option value="ADJECTIVE">형용사</option>
+                        <option value="PREPOSITION">전치사</option>
+                        <option value="CONJUNCTION">접속사</option>
+                        <option value="PHRASE">어구</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-success" id="modalSaveBtn">저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/voca.js"></script>
+</body>
+</html>

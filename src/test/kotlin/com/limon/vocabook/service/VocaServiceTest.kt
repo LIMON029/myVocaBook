@@ -42,7 +42,7 @@ internal class VocaServiceTest(
     fun updateVoca() {
         val dto = AddVocaDto("add", "추가하다", Part.VERB)
         vocaService.addVoca(dto)
-        val result = vocaService.updateErrorCnt(1)
+        val result = vocaService.updateErrorCnt("add")
         assertThat(result.wrong).isEqualTo(1)
     }
 

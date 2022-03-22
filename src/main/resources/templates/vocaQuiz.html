@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>단어 퀴즈</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/vocaQuiz.css" />
+</head>
+<body>
+<div id="mainWrapper">
+    <div id="indexWrapper">
+        <h1 id="now">단어 퀴즈</h1>
+        <div id="buttonWrapper">
+            <button id="getAllWordBtn" class="btn btn-skyblue">모든 단어</button>
+            <button id="getWrongWordBtn" class="btn btn-red">한 번 이상 틀린 단어</button>
+        </div>
+        <a id="goVocaBook" class="btn btn-black" href="/myVoca">단어장으로</a>
+    </div>
+    <div id="answerWrapper" class="hidden">
+        <p id="quiz" class="form-control"></p>
+        <div id="answerButtonWrapper">
+            <button id="answer1" class="btn btn-success answers"></button>
+            <button id="answer2" class="btn btn-success answers"></button>
+            <button id="answer3" class="btn btn-success answers"></button>
+            <button id="answer4" class="btn btn-success answers"></button>
+            <button id="goNextBtn"class="btn btn-info answers hidden">다음으로</button>
+            <a id="submitAnswers"class="btn btn-info answers hidden" href="/viewResult">결과보기</a>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/vocaQuiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#mainWrapper {
+    width: 40%;
+    height: 70%;
+    padding: 15px;
+    border: 5px solid black;
+}
+
+#indexWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#now {
+    height: 20%;
+    font-weight: bold;
+}
+
+#buttonWrapper {
+    width: 80%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+#indexWrapper.hidden {
+    display: none;
+}
+
+#answerWrapper.hidden {
+    display: none;
+}
+
+#answerWrapper {
+    margin: 0 auto;
+    display: flex;
+    width: 80%;
+    height: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#quiz {
+    text-align: center;
+}
+
+#answerButtonWrapper {
+    width: 100%;
+}
+
+.answers {
+    width: 100%;
+    margin: 4px 0px;
+}
+
+*.hidden {
+    display: none;
+}
+
+.btn-red {
+    height: 50px;
+    color: #fff;
+    background-color: #f75454;
+    border-color: #f75454;
+}
+
+.btn-red:hover {
+    height: 50px;
+    color: #fff;
+    background-color: #f74343;
+    border-color: #cc3535;
+}
+
+.btn-skyblue {
+    height: 50px;
+    color: #fff;
+    background-color: #5fd1fa;
+    border-color: #5fd1fa;
+}
+
+.btn-skyblue:hover {
+    height: 50px;
+    color: #fff;
+    background-color: #61c5ff;
+    border-color: #4fa5d6;
+}
+
+.correctAnswer:disabled {
+    background-color: #6d89fc;
+    border-color: #6d89fc;
+    opacity: 1;
+}
+
+.wrongAnswer:disabled {
+    background-color: #f54545;
+    border-color: #f54545;
+    opacity: 1;
+}
+
+.anotherAnswer:disabled {
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+    opacity: 1;
+}
+
+.btn-black {
+    width: 68%;
+    height: 50px;
+    line-height: 35px;
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-black:hover {
+    width: 68%;
+    height: 50px;
+    line-height: 35px;
+    color: #fff;
+    background-color: #363636;
+    border-color: #363636;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈 결과</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/viewResult.css" />
+</head>
+<body>
+<div class="mainWrapper">
+    <div class="col-md-12">
+        <div class="my-top">
+            <h1 style="display:inline;">틀린 단어들</h1>
+            <a href="/main" class="btn btn-success my-btn" role="button">메인으로</a>
+            <a href="/myVoca" class="btn btn-warning my-btn" role="button">단어장</a>
+        </div>
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th>영어</th>
+                <th>한글</th>
+                <th style="width: 15%;">품사</th>
+                <th style="width: 15%;">틀린 횟수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="voca:${wrongList}">
+                <td class="my-td" th:value="${voca.en}" th:text="${voca.en}"></td>
+                <td class="my-td" th:value="${voca.ko}" th:text="${voca.ko}"></td>
+                <td class="my-td" th:value="${voca.part}" th:text="${voca.part}"></td>
+                <td class="my-td"><span th:value="${voca.wrong}" th:text="${voca.wrong}"></span><span class="plus"> +1</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

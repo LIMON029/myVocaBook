@@ -12,6 +12,9 @@ interface VocaRepository: JpaRepository<Voca, Long> {
     fun findByKo(ko:String):Voca?
     fun existsByEn(en:String):Boolean
 
+    @Query("SELECT v FROM Voca v WHERE v.wrong >= :wrong")
+    fun findByWrong(wrong:Int):List<Voca>
+
     @Query("SELECT v.ko FROM Voca v WHERE v.en != :en")
     fun findByKoExceptEn(en:String):List<String>
 

@@ -36,14 +36,12 @@ const main = {
 
         const en = $('#en-content').val();
         const ko = $('#ko-content').val();
-        const part = $('#part-content').val();
 
         const param = {
             en: en,
-            ko: ko,
-            part: part
+            ko: ko
         };
-        if(en == "" || ko == "" || part == ""){
+        if(en == "" || ko == ""){
             alert("단어를 입력해주세요");
             return
         }

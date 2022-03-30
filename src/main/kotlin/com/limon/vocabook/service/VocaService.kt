@@ -24,7 +24,7 @@ class VocaService(
         val voca = VocaBuilder()
             .setEn(dto.en)
             .setKo(dto.ko)
-            .setPart(dto.part)
+            .setCategory(0)
             .build()
         val saved = vocaRepo.save(voca)
         return CodeResponse(200, "[${saved.en}] 저장")
@@ -62,16 +62,23 @@ class VocaService(
 
     // 단어 퀴즈
     @Transactional
-    fun getAllVocaOrderRandom():List<VocaQuizListResponseDto> {
-        val vocaList = vocaRepo.findAll().stream()
+    fun getCategories():List<String> {
+        return vocaRepo.getCategories().stream()
+            .map { category -> "DAY $category" }
+            .collect(Collectors.toList())
+    }
+
+    @Transactional
+    fun getAllVocaOrderRandomWithCategory(start:Int, end:Int):List<VocaQuizListResponseDto> {
+        val vocaList = vocaRepo.findByCategories(start, end).stream()
             .map { voca -> VocaQuizListResponseDto(voca) }
             .collect(Collectors.toList())
         return vocaList.shuffled()
     }
 
     @Transactional
-    fun getWrongVocaOrderRandom():List<VocaQuizListResponseDto> {
-        val vocaList = vocaRepo.findByWrong(1).stream()
+    fun getWrongVocaOrderRandomWithCategory(start: Int, end:Int):List<VocaQuizListResponseDto> {
+        val vocaList = vocaRepo.findByCategoriesAndWrong(start, end).stream()
             .map { voca -> VocaQuizListResponseDto(voca) }
             .collect(Collectors.toList())
         return vocaList.shuffled()

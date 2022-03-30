@@ -15,7 +15,7 @@
     <div id="indexWrapper">
         <h1 id="now">단어 퀴즈</h1>
         <div id="buttonWrapper">
-            <button id="getAllWordBtn" class="btn btn-skyblue">모든 단어</button>
+            <button id="getAllWordBtn" class="btn btn-skyblue" data-toggle="modal" data-target="#modifyModal">모든 단어</button>
             <button id="getWrongWordBtn" class="btn btn-red">한 번 이상 틀린 단어</button>
         </div>
         <a id="goVocaBook" class="btn btn-black" href="/myVoca">단어장으로</a>
@@ -27,8 +27,33 @@
             <button id="answer2" class="btn btn-success answers"></button>
             <button id="answer3" class="btn btn-success answers"></button>
             <button id="answer4" class="btn btn-success answers"></button>
-            <button id="goNextBtn"class="btn btn-info answers hidden">다음으로</button>
-            <a id="submitAnswers"class="btn btn-info answers hidden" href="/viewResult">결과보기</a>
+            <button id="goNextBtn" class="btn btn-info answers hidden">다음으로</button>
+            <a id="submitAnswers" class="btn btn-info answers hidden" href="/viewResult">결과보기</a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">범위 선택</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <select id="cat-start" name="cat-start" class="form-control">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="cat-end" name="cat-end" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="startQuizBtn">퀴즈 시작</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
         </div>
     </div>
 </div>

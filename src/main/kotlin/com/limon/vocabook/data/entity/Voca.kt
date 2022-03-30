@@ -1,10 +1,9 @@
 package com.limon.vocabook.data.entity
 
-import com.limon.vocabook.data.Part
 import javax.persistence.*
 
 @Entity
-class Voca(en:String, ko:String, part: Part) {
+class Voca(en:String, ko:String, category:Int) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0L
@@ -18,9 +17,8 @@ class Voca(en:String, ko:String, part: Part) {
     var ko: String = ko
         protected set
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var part: Part = part
+    var category: Int = category
         protected set
 
     @Column(nullable = false)
@@ -28,7 +26,7 @@ class Voca(en:String, ko:String, part: Part) {
         protected set
 
     override fun toString(): String {
-        return "Voca(ID:$id, EN:$en, KO:$ko, PART:$part, Wrong:$wrong)"
+        return "Voca(ID:$id, EN:$en, KO:$ko, Wrong:$wrong)"
     }
 
     override fun hashCode(): Int {

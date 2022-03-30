@@ -21,7 +21,6 @@
             <tr>
                 <th>영어</th>
                 <th>한글</th>
-                <th style="width: 15%;">품사</th>
                 <th style="width: 15%;">틀린 횟수</th>
             </tr>
             </thead>
@@ -29,7 +28,6 @@
             <tr th:each="voca:${wrongList}">
                 <td class="my-td" th:value="${voca.en}" th:text="${voca.en}"></td>
                 <td class="my-td" th:value="${voca.ko}" th:text="${voca.ko}"></td>
-                <td class="my-td" th:value="${voca.part}" th:text="${voca.part}"></td>
                 <td class="my-td"><span th:value="${voca.wrong}" th:text="${voca.wrong}"></span><span class="plus"> +1</span></td>
             </tr>
             </tbody>

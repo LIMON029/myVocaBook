@@ -1,8 +1,11 @@
 const header = $("meta[name='_csrf_header']").attr('content');
 const token = $("meta[name='_csrf']").attr('content');
 const answers = [$('#answer1'), $('#answer2'), $('#answer3'), $('#answer4')];
-let vocaList
-let nowQuiz = 0
+
+let quizType = -1;
+let vocaList, categories;
+let nowQuiz = 0;
+
 const main = {
     init : function () {
         const _this = this;
@@ -11,32 +14,75 @@ const main = {
                 _this.checkAnswer(i);
             });
         }
+        _this.getCategories();
 
-        $('#getAllWordBtn').on('click', function() {
-            _this.getQuizItem(true);
-            if(vocaList.length!=0) {
-                _this.setQuizItem();
+        $('#startQuizBtn').on('click', function() {
+            if(quizType == 1) {
+                _this.getQuizItem(true);
+                if(vocaList.length!=0) {
+                    _this.setQuizItem();
+                }
+            } else if(quizType == 2) {
+                _this.getQuizItem(false);
+                if(vocaList.length!=0) {
+                    _this.setQuizItem();
+                }
             }
         });
 
+        $('#getAllWordBtn').on('click', function() {
+            quizType = 1;
+        });
+
         $('#getWrongWordBtn').on('click', function() {
-            _this.getQuizItem(false);
-            if(vocaList.length!=0) {
-                _this.setQuizItem();
-            }
+            quizType = 2;
         });
 
         $('#goNextBtn').on('click', function() {
             _this.setQuizItem(_this);
         });
     },
-    getQuizItem : function (all) {
-        const url = all ? "/getQuizItemAll" : "/getQuizItemWrong";
+    getCategories : function() {
+        const url = "/getCategories";
         $.ajax({
             method: 'POST',
             url: url,
             dataType: 'json',
             async: false,
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            success: function(data) {
+                categories = data;
+                const startTag = document.querySelector("#cat-start");
+                const endTag = document.querySelector("#cat-end");
+                $(startTag).append("<option value='0'>직접 추가</option>")
+                $(endTag).append("<option value='0'>직접 추가</option>")
+                for(let i = 1; i < categories.length + 1; i++){
+                    $(startTag).append("<option value='"+ (i)+"'>" + (categories[i-1]) + "</option>")
+                    $(endTag).append("<option value='"+ (i)+"'>" + (categories[i-1]) + "</option>")
+                }
+            },
+            error: function(error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    },
+    getQuizItem : function (all) {
+        const url = all ? "/getQuizItemAll" : "/getQuizItemWrong";
+        const start = $('#cat-start').val();
+        const end = $('#cat-end').val();
+        const param = {
+            start: start,
+            end: end
+        };
+        $.ajax({
+            method: 'POST',
+            url: url,
+            dataType: 'json',
+            async: false,
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(param),
             beforeSend: function(xhr){
                 xhr.setRequestHeader(header, token);
             },
@@ -76,7 +122,6 @@ const main = {
                     answers[i].removeClass("anotherAnswer");
                 }
                 $('#goNextBtn').addClass("hidden");
-                console.log(JSON.stringify(data));
             },
             error: function(error) {
                 alert(JSON.stringify(error));
@@ -114,7 +159,6 @@ const main = {
                     $('#goNextBtn').addClass("hidden");
                     $('#submitAnswers').removeClass("hidden");
                 }
-                console.log(JSON.stringify(data));
             },
             error: function(error) {
                 alert(JSON.stringify(error));

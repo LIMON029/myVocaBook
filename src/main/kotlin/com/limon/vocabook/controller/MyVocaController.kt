@@ -2,6 +2,7 @@ package com.limon.vocabook.controller
 
 import com.limon.vocabook.service.VocaService
 import com.limon.vocabook.service.dto.Response.AnswerResponse
+import com.limon.vocabook.service.dto.VocaRequestDto.CategoryDto
 import com.limon.vocabook.service.dto.VocaRequestDto.AddVocaDto
 import com.limon.vocabook.service.dto.VocaResponseDto.VocaListResponseDto
 import com.limon.vocabook.service.dto.VocaResponseDto.VocaQuizListResponseDto
@@ -16,9 +17,10 @@ class MyVocaController(
 ) {
     private val nowAnswer = mutableMapOf(ANSWER_CODE to "", ANSWER_EN to "")
     private val wrongList = mutableListOf<VocaListResponseDto>()
+
     // Go Page
     @GetMapping("/myVoca")
-    fun myVoca(model: Model):String {
+    fun myVoca(model:Model):String {
         val vocaList = vocaService.getAllVoca()
         model.addAttribute("vocaList", vocaList)
         return "myVoca"
@@ -27,6 +29,8 @@ class MyVocaController(
     @GetMapping("/vocaQuiz")
     fun vocaQuiz(model:Model):String {
         wrongList.clear()
+        val categories = vocaService.getCategories()
+        model.addAttribute("categories", categories)
         return "vocaQuiz"
     }
 
@@ -37,6 +41,13 @@ class MyVocaController(
     }
 
     // Process
+    @PostMapping("/getCategories")
+    @ResponseBody
+    fun getCategories(): List<String> {
+        return vocaService.getCategories()
+    }
+
+
     @PostMapping("/saveWord")
     @ResponseBody
     fun saveWord(@RequestBody vocaDto: AddVocaDto): String {
@@ -53,14 +64,14 @@ class MyVocaController(
 
     @PostMapping("/getQuizItemAll")
     @ResponseBody
-    fun getQuizItemAll():List<VocaQuizListResponseDto> {
-        return vocaService.getAllVocaOrderRandom()
+    fun getQuizItemAll(@RequestBody category:CategoryDto):List<VocaQuizListResponseDto> {
+        return vocaService.getAllVocaOrderRandomWithCategory(category.start, category.end)
     }
 
     @PostMapping("/getQuizItemWrong")
     @ResponseBody
-    fun getQuizItemWrong():List<VocaQuizListResponseDto> {
-        return vocaService.getWrongVocaOrderRandom()
+    fun getQuizItemWrong(@RequestBody category:CategoryDto):List<VocaQuizListResponseDto> {
+        return vocaService.getWrongVocaOrderRandomWithCategory(category.start, category.end)
     }
 
     @PostMapping("/getQuizItem/{en}")

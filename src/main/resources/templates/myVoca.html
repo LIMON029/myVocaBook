@@ -34,7 +34,10 @@
                 <td class="my-td" th:value="${voca.en}" th:text="${voca.en}"></td>
                 <td class="my-td" th:value="${voca.ko}" th:text="${voca.ko}"></td>
                 <td class="my-td" th:value="${voca.wrong}" th:text="${voca.wrong}"></td>
-                <td class="my-td" style="padding: 0px;"><a class="btn btn-danger deleteBtn" th:onclick="|javascript:deleteVoca('${voca.id}')|" style="color: white;">X</a></td>
+                <td class="my-td" style="padding: 0px;">
+                    <a th:if="${voca.id} > 2662" class="btn btn-danger deleteBtn" th:onclick="|javascript:deleteVoca('${voca.id}')|" style="color: white;">X</a>
+                    <a th:unless="${voca.id} > 2662" class="btn deleteBtn disabledDeleteBtn" disabled style="color: white;">X</a>
+                </td>
             </tr>
         </tbody>
     </table>
